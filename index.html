@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<title>戦術ボード</title>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="戦術ボード">
+<meta name="theme-color" content="#15181a">
+<link rel="apple-touch-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAAC0CAIAAACyr5FlAAAFQklEQVR4nO3dv27UTBSG8QmKBA0lZW6BjoIoBRUFEkpJSckdoDSIFnEHlLmGSBRUFKvkQlJS0kCDKCwss+vXOx6PPWfOPL8qfNpd/DFPjv/san3y9MNlAMY8KL0BsIs4IBEHJOKARByQiAMScUAiDkjEAYk4IBEHJOKARByQTuMfend1vd52YEvPP72NeRiTAxJxQCIOSDOOOYYid1qwI+GQkckBiTggEQck4oBEHJCIAxJxQCIOSMQBiTggEQek04cPHiU8Le1ZMCJy+ZgckIgDEnFAIg5IxAGJOCARByTigEQckIgDEnFAIg5IxAGJOCARByTigEQckIgDEnFAIg5IxAGJOCARR0k35/elN2EKcRTTlWG5D+IoY9jEzfm9zUQSv00QyWx2MIo41hWfws35/evbs1U3Zi7iyGb5SLDWB8cc2SxfV1NlBOLIa8nqWisjhHD6+8+vhKelPQujXu6ehBBC2O6fNHL5mByZ/VvptR6/JeLIL369LZcROFs5ei+Blu8P0Wgc8feX6B8ZX8m3ix8p22RPW3EsuU1dTCWzsjC+TwntxJHx7oXdSx0m4mZg9JqIY7qMiUkw8cS7q+vhE+eWYX9shBbiGF3gyAOI4cMOX6fvw9/M6HiOY0kW6ol7r3l3df1z9+roc1/ungwDqmJsBMdxHJaR5aR0mEhkFsv/0lJ8XgRbqYzhq80to/+5olwcxrF2GSHuIOMwgoqy6LjdrXTWuL6ZVsb0f7fJ2+TIeD1j1JIyquNqcuyVkXdsxGTx+OJrCCHsnLwd42dyWClj/em1GT9xDG1fhptdyZCTONb7ZU0rw8fwcBLHUMaxMasMf5/8cHVAmlGzu5IhD5NjOMOz/PomlzH9Rl11PMSRFzOjRxz/oYyh6uPIOL2zl1H7nsXVAWnyAUfGLJ5/elt7E73qJ8dy7EqU1uOgjAknTz9cRj7UzbTsxXxgp3/HxJPI/W/ivewdaLaMEH0ve1cHpJFazmKW5o45KCNe4uR48fld3u1I9v39l/7no1sV881Mjy++Lvy/m7VJmxluVaSGdisxZby+PQu3VpazOFe7lYlfjtgy1tyG6lQ/OV58fje9HptlccjOPiWNq8lxqGAZDniOgzIW8hDHcHr3u5giZdg8T0nmIY5DzIwsqj8g3fNz9+rm/MhjVsrC03lKx8nk6GZ4zNXPbQaGg31KcBNHKF2Gv7ER3MRR9iBjrwwfYyP4iIMyVlL3Aam1sxJPZYSq44h8i/X7xVpr5vI4Y6jW3UpkGd0Pa6zi4Ws6Gxuh0jhmldHJ20cLZYQadyvxH8vYW8Lujxk/yNNzWUaoK465h5/dmuVKpKksOtXEkXxiMvqBj8h3yKZ3Rr7LCLXEsfCUdfoDQWmHI+7LCFXEkeVixuguJk0LWXSsx5H3Mle/rgmVtNNEz24cq179jK+kwSZ6RuPY7Lp4y2t/lMWLYNbeMWmWuTgoww5bcVCGKVbuZT/nS1S2u+e7VzXdy56v17GpfByUYVbhOCjDspJxUIZxZS6CkUUVCkwOyqjF1nFQRkW2juPowlOGHQV2KxPLTxmmlDlbGb1bM2VYU+xUdvQ+7zCl5HWOrgnKMKvwFVLKsKz8eyswizggEQck4oBEHJCIAxJxQCIOSMQBiTggEQck4oBEHJCIAxJxQEq8l33as2BE5PIxOSARByTigEQckIgDEnFAIg5IxAGJOCARByTigEQckBK/MM79LVURmByYQByQiAPSybOPb0pvA4xickAiDkjEAYk4IBEHJOKARByQiAMScUAiDkjEAYk4IP0FK8nR+JPWyz0AAAAASUVORK5CYII=">
+<style>
+  :root{
+    --bg:#15181a;
+    --panel:#1f2427;
+    --panel-2:#262c30;
+    --line:#3a4247;
+    --ink:#eef1f0;
+    --sub:#9aa6a9;
+    --accent:#e8b93a;
+    --blue:#3b78c9;
+    --red:#c9463b;
+  }
+  *{box-sizing:border-box; -webkit-tap-highlight-color:transparent;}
+  html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif;
+    overscroll-behavior:none; height:100%;}
+  body{padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+    display:flex; flex-direction:column; height:100vh;}
+
+  header{padding:8px 10px 4px; flex:0 0 auto;}
+  h1{margin:0 0 6px; font-size:14px; font-weight:800; letter-spacing:.12em; text-transform:uppercase;
+    border-left:4px solid var(--accent); padding-left:8px;}
+
+  .row{display:flex; gap:6px; margin-bottom:6px; flex-wrap:wrap; align-items:center;}
+
+  .seg{display:flex; background:var(--panel-2); border-radius:10px; padding:3px; gap:3px;}
+  .seg button{border:none; background:transparent; color:var(--sub); padding:7px 8px; border-radius:8px;
+    font-size:12px; font-weight:700;}
+  .seg button.active{background:var(--accent); color:#20240a;}
+
+  .presetGroup{display:flex; gap:6px; flex:1; min-width:0;}
+  .presetChip{display:flex; align-items:center; gap:4px; flex:1; min-width:0; background:var(--panel);
+    border:1px solid var(--line); border-radius:9px; padding:2px 4px 2px 8px;}
+  .presetChip .tag{font-size:9px; font-weight:800; color:var(--sub); white-space:nowrap;}
+  select{flex:1; min-width:0; background:transparent; color:var(--ink); border:none;
+    padding:6px 2px; font-size:12px; font-weight:600;}
+  select:focus{outline:none;}
+
+  .tools{display:flex; gap:6px; flex:1; flex-wrap:wrap;}
+  .tools button{flex:1 1 auto; min-width:50px; border:1px solid var(--line); background:var(--panel);
+    color:var(--ink); border-radius:9px; padding:7px 4px; font-size:10.5px; font-weight:600;
+    display:flex; flex-direction:column; align-items:center; gap:2px;}
+  .tools button .ic{font-size:15px; line-height:1;}
+  .tools button.active{border-color:var(--accent); background:#332c14; color:var(--accent);}
+
+  .actions{display:flex; gap:6px; flex-wrap:wrap;}
+  .actions button{border:1px solid var(--line); background:var(--panel); color:var(--sub);
+    border-radius:9px; padding:6px 9px; font-size:11px; font-weight:700;}
+
+  .swatches{display:flex; gap:7px; align-items:center;}
+  .swatch{width:20px; height:20px; border-radius:50%; border:2px solid transparent; padding:0;}
+  .swatch.selected{border-color:var(--accent);}
+
+  .teamrow{display:flex; gap:8px; align-items:center;}
+  .teamchip{display:flex; align-items:center; gap:5px; flex:1; background:var(--panel);
+    border:1px solid var(--line); border-radius:9px; padding:4px 8px;}
+  .dot{width:11px; height:11px; border-radius:50%; flex:0 0 auto;}
+  .teamchip input{flex:1; min-width:0; background:transparent; border:none; color:var(--ink);
+    font-size:12px; font-weight:700; outline:none;}
+
+  main{flex:1 1 auto; min-height:0; display:flex; align-items:flex-start; justify-content:center;
+    padding:2px 8px 10px; overflow:auto; -webkit-overflow-scrolling:touch;}
+
+  #pitchWrap{position:relative; width:100%; max-width:520px; touch-action:none; border-radius:10px;
+    overflow:hidden; box-shadow:0 0 0 1px #0006, 0 8px 24px #0007; flex:0 0 auto; background:#2e7d4f;}
+  #pitchWrap svg, #pitchWrap canvas{position:absolute; top:0; left:0; width:100%; height:100%; display:block;}
+  #pitchWrap svg{z-index:1; pointer-events:none;}
+  #drawLayer{z-index:2;}
+  #tokens{position:absolute; top:0; left:0; width:100%; height:100%; z-index:3;}
+
+  .token{position:absolute; transform:translate(-50%,-50%); width:8.4%; aspect-ratio:1/1; border-radius:50%;
+    display:flex; align-items:center; justify-content:center; font-size:10px; font-weight:800; color:#fff;
+    border:2px solid rgba(255,255,255,0.85); box-shadow:0 2px 4px #0006; user-select:none; touch-action:none;
+    text-align:center; line-height:1; overflow:hidden; padding:1px;}
+  .token.blue{background:var(--blue);}
+  .token.red{background:var(--red);}
+  .token.gk{background:#232323; border-color:var(--accent);}
+  .token.ball{width:5%; background:radial-gradient(circle at 35% 30%, #fff, #ccc 60%, #999);
+    border:1.5px solid #444; color:#000; font-size:0;}
+
+  .overlayInput{position:absolute; z-index:5; transform:translate(-50%,-50%); background:#000d; color:#fff;
+    border:1px solid var(--accent); border-radius:6px; padding:4px 6px; font-size:13px; font-weight:600;
+    min-width:60px; max-width:75%;}
+
+  footer{flex:0 0 auto; padding:2px 12px 8px; text-align:center; color:var(--sub); font-size:10px;}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>サッカー戦術ボード</h1>
+
+  <div class="row">
+    <div class="seg" id="modeSeg">
+      <button data-mode="full" class="active">フルコート</button>
+      <button data-mode="half">ハーフコート</button>
+    </div>
+  </div>
+
+  <div class="row" id="fullPresetRow">
+    <div class="presetChip"><span class="tag">ホーム</span><select id="homeFormationSelect"></select></div>
+    <div class="presetChip"><span class="tag">アウェイ</span><select id="awayFormationSelect"></select></div>
+  </div>
+  <div class="row" id="halfPresetRow" style="display:none;">
+    <div class="presetChip" style="flex:1;"><span class="tag">シーン</span><select id="halfScenarioSelect"></select></div>
+  </div>
+
+  <div class="row">
+    <div class="tools" id="toolRow">
+      <button data-tool="move" class="active"><span class="ic">✋</span>移動</button>
+      <button data-tool="arrow"><span class="ic">➤</span>矢印</button>
+      <button data-tool="pen"><span class="ic">✎</span>ペン</button>
+      <button data-tool="text"><span class="ic">Ａ</span>メモ</button>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="swatches" id="swatchRow">
+      <button class="swatch selected" style="background:#ffffff" data-color="#ffffff"></button>
+      <button class="swatch" style="background:#f4d13a" data-color="#f4d13a"></button>
+      <button class="swatch" style="background:#3ad1e0" data-color="#3ad1e0"></button>
+      <button class="swatch" style="background:#111111" data-color="#111111"></button>
+    </div>
+    <div class="seg" id="dashSeg">
+      <button data-dash="solid" class="active">パス<br>実線</button>
+      <button data-dash="dash">走る<br>破線</button>
+    </div>
+    <div class="actions" style="margin-left:auto;">
+      <button id="undoBtn">戻す</button>
+      <button id="clearBtn">描画消去</button>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="actions" style="flex:1;">
+      <button id="resetBtn" style="flex:1;">配置リセット</button>
+      <button id="flipBtn" style="flex:1;">反転</button>
+    </div>
+  </div>
+
+  <div class="row teamrow">
+    <div class="teamchip"><span class="dot" style="background:var(--blue)"></span>
+      <input id="blueLabelInput" maxlength="10" value="BLUE"></div>
+    <div class="teamchip"><span class="dot" style="background:var(--red)"></span>
+      <input id="redLabelInput" maxlength="10" value="RED"></div>
+  </div>
+</header>
+
+<main>
+  <div id="pitchWrap">
+    <svg id="pitchSvg"></svg>
+    <canvas id="drawLayer"></canvas>
+    <div id="tokens"></div>
+  </div>
+</main>
+
+<footer>スクリーンショットで記録してください（配置と描画は自動で保存され、次回開いた時も復元されます）</footer>
+
+<script>
+(function(){
+  const W = 68, H_FULL = 105, H_HALF = 52.5;
+  const STORAGE_KEY = 'soccerTacticsBoardState_v3';
+
+  function deepCopy(o){ return JSON.parse(JSON.stringify(o)); }
+
+  // ---------- formation templates (defined in "own goal at y=100" orientation) ----------
+  const FULL_FORMATIONS = {
+    '4-4-2': [
+      {n:1,x:34,y:100},
+      {n:2,x:58,y:85},{n:3,x:43,y:88},{n:4,x:25,y:88},{n:5,x:10,y:85},
+      {n:6,x:56,y:68},{n:7,x:40,y:70},{n:8,x:28,y:70},{n:9,x:12,y:68},
+      {n:10,x:42,y:55},{n:11,x:26,y:55}
+    ],
+    '4-3-3': [
+      {n:1,x:34,y:100},
+      {n:2,x:56,y:85},{n:3,x:43,y:88},{n:4,x:25,y:88},{n:5,x:10,y:85},
+      {n:6,x:52,y:68},{n:7,x:34,y:70},{n:8,x:16,y:68},
+      {n:9,x:54,y:54},{n:10,x:34,y:56},{n:11,x:14,y:54}
+    ],
+    '3-5-2': [
+      {n:1,x:34,y:100},
+      {n:2,x:48,y:88},{n:3,x:34,y:90},{n:4,x:20,y:88},
+      {n:5,x:58,y:70},{n:6,x:44,y:72},{n:7,x:34,y:68},{n:8,x:24,y:72},{n:9,x:10,y:70},
+      {n:10,x:40,y:55},{n:11,x:28,y:55}
+    ],
+    '4-2-3-1': [
+      {n:1,x:34,y:100},
+      {n:2,x:58,y:85},{n:3,x:43,y:88},{n:4,x:25,y:88},{n:5,x:10,y:85},
+      {n:6,x:42,y:74},{n:7,x:26,y:74},
+      {n:8,x:54,y:60},{n:9,x:34,y:62},{n:10,x:14,y:60},
+      {n:11,x:34,y:52}
+    ],
+    '4-1-4-1': [
+      {n:1,x:34,y:100},
+      {n:2,x:58,y:85},{n:3,x:43,y:88},{n:4,x:25,y:88},{n:5,x:10,y:85},
+      {n:6,x:34,y:74},
+      {n:7,x:56,y:62},{n:8,x:42,y:64},{n:9,x:26,y:64},{n:10,x:12,y:62},
+      {n:11,x:34,y:52}
+    ],
+    '3-4-3': [
+      {n:1,x:34,y:100},
+      {n:2,x:48,y:88},{n:3,x:34,y:90},{n:4,x:20,y:88},
+      {n:5,x:58,y:70},{n:6,x:42,y:72},{n:7,x:26,y:72},{n:8,x:10,y:70},
+      {n:9,x:54,y:54},{n:10,x:34,y:56},{n:11,x:14,y:54}
+    ],
+    '4-5-1': [
+      {n:1,x:34,y:100},
+      {n:2,x:58,y:85},{n:3,x:43,y:88},{n:4,x:25,y:88},{n:5,x:10,y:85},
+      {n:6,x:58,y:66},{n:7,x:46,y:70},{n:8,x:34,y:68},{n:9,x:22,y:70},{n:10,x:10,y:66},
+      {n:11,x:34,y:52}
+    ],
+    '5-3-2': [
+      {n:1,x:34,y:100},
+      {n:2,x:60,y:84},{n:3,x:48,y:88},{n:4,x:34,y:90},{n:5,x:20,y:88},{n:6,x:8,y:84},
+      {n:7,x:46,y:70},{n:8,x:34,y:68},{n:9,x:22,y:70},
+      {n:10,x:42,y:54},{n:11,x:26,y:54}
+    ]
+  };
+  const FULL_FORMATION_NAMES = {'4-4-2':'4-4-2','4-3-3':'4-3-3','3-5-2':'3-5-2','4-2-3-1':'4-2-3-1','4-1-4-1':'4-1-4-1','3-4-3':'3-4-3','4-5-1':'4-5-1','5-3-2':'5-3-2'};
+
+  function blueFromTemplate(name){
+    const base = FULL_FORMATIONS[name] || FULL_FORMATIONS['4-3-3'];
+    return base.map((p,i)=>({team:'blue', gk:i===0, n:p.n, label:String(p.n), x:p.x, y:p.y}));
+  }
+  function redFromTemplate(name){
+    const base = FULL_FORMATIONS[name] || FULL_FORMATIONS['4-3-3'];
+    return base.map((p,i)=>({team:'red', gk:i===0, n:p.n, label:String(p.n), x:p.x, y:H_FULL-p.y}));
+  }
+  function makeFullFormation(homeName, awayName){
+    return { players:[...blueFromTemplate(homeName), ...redFromTemplate(awayName)], ball:{x:34,y:52.5} };
+  }
+
+  const HALF_SCENARIOS = {
+    'corner': {
+      blue:[
+        {n:1,x:34,y:3,gk:true},
+        {n:2,x:28,y:8},{n:3,x:34,y:8},{n:4,x:40,y:8},{n:5,x:24,y:12},{n:6,x:44,y:12},
+        {n:7,x:30,y:16},{n:8,x:38,y:16},{n:9,x:20,y:18},{n:10,x:48,y:18},
+        {n:11,x:34,y:23}
+      ],
+      red:[
+        {n:1,x:66,y:2},
+        {n:2,x:26,y:10},{n:3,x:34,y:10},{n:4,x:42,y:10},{n:5,x:30,y:14},{n:6,x:38,y:14},
+        {n:7,x:22,y:18},{n:8,x:46,y:18},
+        {n:9,x:34,y:30},{n:10,x:20,y:32},{n:11,x:48,y:32}
+      ],
+      ball:{x:66,y:1}
+    },
+    'freekick': {
+      blue:[
+        {n:1,x:26,y:3,gk:true},
+        {n:2,x:30,y:14},{n:3,x:33,y:14},{n:4,x:36,y:14},{n:5,x:39,y:14},
+        {n:6,x:24,y:10},{n:7,x:44,y:10},{n:8,x:34,y:9},
+        {n:9,x:20,y:20},{n:10,x:48,y:20},{n:11,x:34,y:24}
+      ],
+      red:[
+        {n:1,x:34,y:22},
+        {n:2,x:26,y:11},{n:3,x:34,y:11},{n:4,x:42,y:11},{n:5,x:20,y:15},{n:6,x:48,y:15},
+        {n:7,x:30,y:27},{n:8,x:38,y:27},{n:9,x:15,y:29},{n:10,x:53,y:29},
+        {n:11,x:34,y:33}
+      ],
+      ball:{x:34,y:22}
+    }
+  };
+  const HALF_SCENARIO_NAMES = {'corner':'コーナーキック','freekick':'フリーキック'};
+
+  function makeHalfFormation(name){
+    const s = HALF_SCENARIOS[name] || HALF_SCENARIOS['corner'];
+    const blue = s.blue.map(p=>({team:'blue', gk:!!p.gk, n:p.n, label:String(p.n), x:p.x, y:p.y}));
+    const red = s.red.map(p=>({team:'red', gk:!!p.gk, n:p.n, label:String(p.n), x:p.x, y:p.y}));
+    return { players:[...blue,...red], ball:deepCopy(s.ball) };
+  }
+
+  // ---------- state ----------
+  function freshFull(home,away){
+    const f = makeFullFormation(home,away);
+    return {homePreset:home, awayPreset:away, players:f.players, ball:f.ball, drawings:[]};
+  }
+  function freshHalf(name){
+    const f = makeHalfFormation(name);
+    return {preset:name, players:f.players, ball:f.ball, drawings:[]};
+  }
+
+  const state = {
+    mode:'full',
+    tool:'move',
+    color:'#ffffff',
+    lineStyle:'solid',
+    teamLabels:{blue:'BLUE', red:'RED'},
+    full: freshFull('4-3-3','4-3-3'),
+    half: freshHalf('corner')
+  };
+
+  function loadPersisted(){
+    try{
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if(!raw) return;
+      const obj = JSON.parse(raw);
+      if(!obj) return;
+      if(obj.mode) state.mode = obj.mode;
+      if(obj.color) state.color = obj.color;
+      if(obj.lineStyle) state.lineStyle = obj.lineStyle;
+      if(obj.teamLabels) state.teamLabels = obj.teamLabels;
+      if(obj.full && obj.full.players && obj.full.ball){
+        state.full = obj.full;
+        if(!state.full.homePreset || !FULL_FORMATIONS[state.full.homePreset]) state.full.homePreset = '4-3-3';
+        if(!state.full.awayPreset || !FULL_FORMATIONS[state.full.awayPreset]) state.full.awayPreset = '4-3-3';
+        if(!state.full.drawings) state.full.drawings = [];
+      }
+      if(obj.half && obj.half.players && obj.half.ball){
+        state.half = obj.half;
+        if(!state.half.preset || !HALF_SCENARIOS[state.half.preset]) state.half.preset = 'corner';
+        if(!state.half.drawings) state.half.drawings = [];
+      }
+    }catch(e){}
+  }
+  function saveState(){
+    try{ localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }catch(e){}
+  }
+
+  try{ loadPersisted(); }catch(e){}
+  // 保存データが壊れていたり、古い版のデータで選手が欠けた場合は初期配置に戻す
+  try{
+    if(!state.full || !Array.isArray(state.full.players) || state.full.players.length < 22 || !state.full.ball){
+      state.full = freshFull(state.full?.homePreset || '4-3-3', state.full?.awayPreset || '4-3-3');
+    }
+    if(!state.half || !Array.isArray(state.half.players) || state.half.players.length < 22 || !state.half.ball){
+      state.half = freshHalf(state.half?.preset || 'corner');
+    }
+  }catch(e){ state.full = freshFull('4-3-3','4-3-3'); state.half = freshHalf('corner'); }
+  state.tool = 'move';
+
+  function curH(){ return state.mode==='full' ? H_FULL : H_HALF; }
+  function curState(){ return state[state.mode]; }
+
+  const pitchWrap = document.getElementById('pitchWrap');
+  const svg = document.getElementById('pitchSvg');
+  const canvas = document.getElementById('drawLayer');
+  const ctx = canvas.getContext('2d');
+  const tokensEl = document.getElementById('tokens');
+  const homeFormationSelect = document.getElementById('homeFormationSelect');
+  const awayFormationSelect = document.getElementById('awayFormationSelect');
+  const halfScenarioSelect = document.getElementById('halfScenarioSelect');
+  const fullPresetRow = document.getElementById('fullPresetRow');
+  const halfPresetRow = document.getElementById('halfPresetRow');
+
+  function fillSelect(sel, namesObj, current){
+    sel.innerHTML='';
+    Object.keys(namesObj).forEach(k=>{
+      const o = document.createElement('option');
+      o.value=k; o.textContent=namesObj[k];
+      if(k===current) o.selected=true;
+      sel.appendChild(o);
+    });
+  }
+  function refreshPresetUI(){
+    fillSelect(homeFormationSelect, FULL_FORMATION_NAMES, state.full.homePreset);
+    fillSelect(awayFormationSelect, FULL_FORMATION_NAMES, state.full.awayPreset);
+    fillSelect(halfScenarioSelect, HALF_SCENARIO_NAMES, state.half.preset);
+    fullPresetRow.style.display = (state.mode==='full') ? 'flex' : 'none';
+    halfPresetRow.style.display = (state.mode==='half') ? 'flex' : 'none';
+  }
+
+  homeFormationSelect.addEventListener('change', ()=>{
+    const name = homeFormationSelect.value;
+    state.full.homePreset = name;
+    const newBlue = blueFromTemplate(name);
+    state.full.players = [...newBlue, ...state.full.players.filter(p=>p.team==='red')];
+    renderTokens(); saveState();
+  });
+  awayFormationSelect.addEventListener('change', ()=>{
+    const name = awayFormationSelect.value;
+    state.full.awayPreset = name;
+    const newRed = redFromTemplate(name);
+    state.full.players = [...state.full.players.filter(p=>p.team==='blue'), ...newRed];
+    renderTokens(); saveState();
+  });
+  halfScenarioSelect.addEventListener('change', ()=>{
+    const name = halfScenarioSelect.value;
+    const f = makeHalfFormation(name);
+    state.half.preset = name; state.half.players = f.players; state.half.ball = f.ball;
+    renderTokens(); saveState();
+  });
+
+  // ---------- pitch ----------
+  function updatePitchWrapHeight(){
+    const h = curH();
+    const width = pitchWrap.clientWidth || pitchWrap.getBoundingClientRect().width || 300;
+    pitchWrap.style.height = (width * (h / W)) + 'px';
+  }
+
+  function buildPitchSVG(){
+    const h = curH();
+    svg.setAttribute('viewBox', `0 0 ${W} ${h}`);
+    updatePitchWrapHeight();
+    const S='http://www.w3.org/2000/svg';
+    while(svg.firstChild) svg.removeChild(svg.firstChild);
+
+    const stripes = 11;
+    for(let i=0;i<stripes;i++){
+      const r = document.createElementNS(S,'rect');
+      const sh = h/stripes;
+      r.setAttribute('x',0); r.setAttribute('y', i*sh);
+      r.setAttribute('width', W); r.setAttribute('height', sh);
+      r.setAttribute('fill', i%2===0 ? '#2e7d4f' : '#357f57');
+      svg.appendChild(r);
+    }
+    const lw = 0.28;
+    function line(x1,y1,x2,y2){
+      const l=document.createElementNS(S,'line');
+      l.setAttribute('x1',x1); l.setAttribute('y1',y1); l.setAttribute('x2',x2); l.setAttribute('y2',y2);
+      l.setAttribute('stroke','rgba(245,245,240,0.92)'); l.setAttribute('stroke-width',lw);
+      svg.appendChild(l);
+    }
+    function rect(x,y,w,hh){
+      const r=document.createElementNS(S,'rect');
+      r.setAttribute('x',x); r.setAttribute('y',y); r.setAttribute('width',w); r.setAttribute('height',hh);
+      r.setAttribute('fill','none'); r.setAttribute('stroke','rgba(245,245,240,0.92)'); r.setAttribute('stroke-width',lw);
+      svg.appendChild(r);
+    }
+    function circle(cx,cy,r){
+      const c=document.createElementNS(S,'circle');
+      c.setAttribute('cx',cx); c.setAttribute('cy',cy); c.setAttribute('r',r);
+      c.setAttribute('fill','none'); c.setAttribute('stroke','rgba(245,245,240,0.92)'); c.setAttribute('stroke-width',lw);
+      svg.appendChild(c);
+    }
+    function dot(cx,cy){
+      const c=document.createElementNS(S,'circle');
+      c.setAttribute('cx',cx); c.setAttribute('cy',cy); c.setAttribute('r',0.35);
+      c.setAttribute('fill','rgba(245,245,240,0.92)');
+      svg.appendChild(c);
+    }
+    function cornerArc(cx,cy,startAngle){
+      const p=document.createElementNS(S,'path'); const r=1;
+      const toRad=d=>d*Math.PI/180;
+      const x1=cx+r*Math.cos(toRad(startAngle)), y1=cy+r*Math.sin(toRad(startAngle));
+      const x2=cx+r*Math.cos(toRad(startAngle+90)), y2=cy+r*Math.sin(toRad(startAngle+90));
+      p.setAttribute('d',`M ${x1} ${y1} A ${r} ${r} 0 0 1 ${x2} ${y2}`);
+      p.setAttribute('fill','none'); p.setAttribute('stroke','rgba(245,245,240,0.92)'); p.setAttribute('stroke-width',lw);
+      svg.appendChild(p);
+    }
+
+    rect(0,0,W,h);
+    line(0,52.5,W,52.5);
+    circle(34,52.5,9.15); dot(34,52.5);
+
+    rect(13.84,0,40.32,16.5); rect(24.84,0,18.32,5.5); dot(34,11); rect(30.34,-2,7.32,2);
+    cornerArc(0,0,0); cornerArc(W,0,90);
+
+    if(state.mode==='full'){
+      rect(13.84,h-16.5,40.32,16.5); rect(24.84,h-5.5,18.32,5.5); dot(34,h-11); rect(30.34,h,7.32,2);
+      cornerArc(0,h,270); cornerArc(W,h,180);
+    }
+  }
+
+  // ---------- tokens ----------
+  function renderTokens(){
+    tokensEl.innerHTML='';
+    tokensEl.style.pointerEvents = (state.tool==='move') ? 'auto' : 'none';
+    const h = curH();
+    const s = curState();
+
+    s.players.forEach(p=>{
+      const el = document.createElement('div');
+      el.className = 'token ' + (p.gk ? 'gk' : p.team);
+      el.style.left = (p.x/W*100)+'%';
+      el.style.top = (p.y/h*100)+'%';
+      el.textContent = p.label;
+      el.addEventListener('pointerdown', (e)=>startDragToken(e, p, el, true));
+      tokensEl.appendChild(el);
+    });
+
+    const ballEl = document.createElement('div');
+    ballEl.className = 'token ball';
+    ballEl.style.left = (s.ball.x/W*100)+'%';
+    ballEl.style.top = (s.ball.y/h*100)+'%';
+    ballEl.addEventListener('pointerdown', (e)=>startDragToken(e, s.ball, ballEl, false));
+    tokensEl.appendChild(ballEl);
+  }
+
+  function startDragToken(e, obj, el, canRename){
+    if(state.tool!=='move') return;
+    e.stopPropagation(); e.preventDefault();
+    el.setPointerCapture(e.pointerId);
+    const h = curH();
+    const startX = e.clientX, startY = e.clientY;
+    let moved = false, longFired = false;
+
+    const timer = canRename ? setTimeout(()=>{
+      if(!moved){
+        longFired = true;
+        openInlineInput(el, obj.label, (val)=>{
+          if(val && val.trim()){ obj.label = val.trim().slice(0,8); }
+          renderTokens(); saveState();
+        });
+      }
+    }, 550) : null;
+
+    function move(ev){
+      const dx = ev.clientX-startX, dy = ev.clientY-startY;
+      if(Math.hypot(dx,dy) > 6) moved = true;
+      if(longFired) return;
+      if(moved && timer) clearTimeout(timer);
+      const rect = pitchWrap.getBoundingClientRect();
+      let x = (ev.clientX - rect.left) / rect.width * W;
+      let y = (ev.clientY - rect.top) / rect.height * h;
+      x = Math.max(0, Math.min(W, x)); y = Math.max(0, Math.min(h, y));
+      obj.x = x; obj.y = y;
+      el.style.left = (x/W*100)+'%'; el.style.top = (y/h*100)+'%';
+    }
+    function up(){
+      if(timer) clearTimeout(timer);
+      el.removeEventListener('pointermove', move);
+      el.removeEventListener('pointerup', up);
+      if(moved && !longFired) saveState();
+    }
+    el.addEventListener('pointermove', move);
+    el.addEventListener('pointerup', up);
+  }
+
+  function openInlineInput(anchorEl, prefill, onCommit){
+    const rect = pitchWrap.getBoundingClientRect();
+    const aRect = anchorEl.getBoundingClientRect();
+    const input = document.createElement('input');
+    input.className='overlayInput';
+    input.value = prefill || '';
+    input.style.left = (aRect.left - rect.left + aRect.width/2)+'px';
+    input.style.top = (aRect.top - rect.top + aRect.height/2)+'px';
+    pitchWrap.appendChild(input);
+    input.focus(); input.select();
+    let done=false;
+    function commit(){
+      if(done) return; done=true;
+      onCommit(input.value);
+      input.remove();
+    }
+    input.addEventListener('keydown',(ev)=>{
+      if(ev.key==='Enter'){ ev.preventDefault(); commit(); }
+      if(ev.key==='Escape'){ done=true; input.remove(); }
+    });
+    input.addEventListener('blur', commit);
+  }
+
+  // ---------- drawing layer ----------
+  function fitCanvas(){
+    const rect = pitchWrap.getBoundingClientRect();
+    const dpr = window.devicePixelRatio || 1;
+    canvas.width = Math.max(1, Math.round(rect.width*dpr));
+    canvas.height = Math.max(1, Math.round(rect.height*dpr));
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+  }
+  function m2px(x,y){
+    const rect = pitchWrap.getBoundingClientRect(); const h = curH();
+    return [x/W*rect.width, y/h*rect.height];
+  }
+  function drawArrow(x1,y1,x2,y2,color,dash){
+    const [px1,py1]=m2px(x1,y1), [px2,py2]=m2px(x2,y2);
+    ctx.setLineDash(dash ? [9,7] : []);
+    ctx.strokeStyle=color; ctx.fillStyle=color; ctx.lineWidth=2.6; ctx.lineCap='round';
+    ctx.beginPath(); ctx.moveTo(px1,py1); ctx.lineTo(px2,py2); ctx.stroke();
+    ctx.setLineDash([]);
+    const ang = Math.atan2(py2-py1, px2-px1); const headLen=12;
+    ctx.beginPath(); ctx.moveTo(px2,py2);
+    ctx.lineTo(px2-headLen*Math.cos(ang-Math.PI/7), py2-headLen*Math.sin(ang-Math.PI/7));
+    ctx.lineTo(px2-headLen*Math.cos(ang+Math.PI/7), py2-headLen*Math.sin(ang+Math.PI/7));
+    ctx.closePath(); ctx.fill();
+  }
+  function drawPen(points,color){
+    if(points.length<2) return;
+    ctx.setLineDash([]);
+    ctx.strokeStyle=color; ctx.lineWidth=2.6; ctx.lineCap='round'; ctx.lineJoin='round';
+    ctx.beginPath();
+    const [p0x,p0y]=m2px(points[0].x,points[0].y); ctx.moveTo(p0x,p0y);
+    for(let i=1;i<points.length;i++){ const [px,py]=m2px(points[i].x,points[i].y); ctx.lineTo(px,py); }
+    ctx.stroke();
+  }
+  function drawText(x,y,text,color){
+    const [px,py]=m2px(x,y);
+    ctx.fillStyle='rgba(0,0,0,0.55)';
+    ctx.font='700 14px -apple-system,Helvetica,Arial,sans-serif';
+    const wpad=6, textW=ctx.measureText(text).width;
+    ctx.fillRect(px-2, py-14, textW+wpad*2-2, 18);
+    ctx.fillStyle=color; ctx.fillText(text, px+wpad-2, py);
+  }
+  function redrawCanvas(extra){
+    fitCanvas(); ctx.clearRect(0,0,canvas.width,canvas.height);
+    const s = curState();
+    s.drawings.forEach(d=>{
+      if(d.type==='arrow') drawArrow(d.x1,d.y1,d.x2,d.y2,d.color,d.dash);
+      else if(d.type==='pen') drawPen(d.points,d.color);
+      else if(d.type==='text') drawText(d.x,d.y,d.text,d.color);
+    });
+    if(extra){
+      if(extra.type==='arrow') drawArrow(extra.x1,extra.y1,extra.x2,extra.y2,extra.color,extra.dash);
+      else if(extra.type==='pen') drawPen(extra.points,extra.color);
+    }
+  }
+
+  let drawing = null;
+  function px2m(clientX, clientY){
+    const rect = pitchWrap.getBoundingClientRect(); const h = curH();
+    return [ (clientX-rect.left)/rect.width*W, (clientY-rect.top)/rect.height*h ];
+  }
+  pitchWrap.addEventListener('pointerdown', (e)=>{
+    if(state.tool==='move') return;
+    const [x,y] = px2m(e.clientX, e.clientY);
+    if(state.tool==='text'){
+      openTextInput(e.clientX, e.clientY, x, y);
+      return;
+    }
+    pitchWrap.setPointerCapture(e.pointerId);
+    if(state.tool==='arrow'){
+      drawing = {type:'arrow', x1:x, y1:y, x2:x, y2:y, color:state.color, dash: state.lineStyle==='dash'};
+    } else if(state.tool==='pen'){
+      drawing = {type:'pen', points:[{x,y}], color:state.color};
+    }
+  });
+  pitchWrap.addEventListener('pointermove', (e)=>{
+    if(!drawing) return;
+    const [x,y] = px2m(e.clientX, e.clientY);
+    if(drawing.type==='arrow'){ drawing.x2=x; drawing.y2=y; }
+    else if(drawing.type==='pen'){ drawing.points.push({x,y}); }
+    redrawCanvas(drawing);
+  });
+  function endDraw(){
+    if(!drawing) return;
+    curState().drawings.push(drawing);
+    drawing = null;
+    redrawCanvas();
+    saveState();
+  }
+  pitchWrap.addEventListener('pointerup', endDraw);
+  pitchWrap.addEventListener('pointercancel', endDraw);
+
+  function openTextInput(clientX, clientY, mx, my){
+    const rect = pitchWrap.getBoundingClientRect();
+    const input = document.createElement('input');
+    input.className='overlayInput';
+    input.placeholder='メモを入力';
+    input.style.left = (clientX-rect.left)+'px';
+    input.style.top = (clientY-rect.top)+'px';
+    pitchWrap.appendChild(input);
+    input.focus();
+    let done=false;
+    function commit(){
+      if(done) return; done=true;
+      const val = input.value.trim();
+      if(val) curState().drawings.push({type:'text', x:mx, y:my, text:val, color:state.color});
+      input.remove(); redrawCanvas(); saveState();
+    }
+    input.addEventListener('keydown',(ev)=>{
+      if(ev.key==='Enter'){ ev.preventDefault(); commit(); }
+      if(ev.key==='Escape'){ done=true; input.remove(); }
+    });
+    input.addEventListener('blur', commit);
+  }
+
+  // ---------- toolbar wiring ----------
+  document.getElementById('modeSeg').addEventListener('click', (e)=>{
+    const btn = e.target.closest('button[data-mode]'); if(!btn) return;
+    document.querySelectorAll('#modeSeg button').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    state.mode = btn.dataset.mode;
+    refreshPresetUI(); buildPitchSVG(); renderTokens(); redrawCanvas(); saveState();
+  });
+
+  document.getElementById('toolRow').addEventListener('click', (e)=>{
+    const btn = e.target.closest('button[data-tool]'); if(!btn) return;
+    document.querySelectorAll('#toolRow button').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    state.tool = btn.dataset.tool;
+    tokensEl.style.pointerEvents = (state.tool==='move') ? 'auto' : 'none';
+  });
+
+  document.getElementById('swatchRow').addEventListener('click', (e)=>{
+    const btn = e.target.closest('button[data-color]'); if(!btn) return;
+    document.querySelectorAll('.swatch').forEach(b=>b.classList.remove('selected'));
+    btn.classList.add('selected');
+    state.color = btn.dataset.color; saveState();
+  });
+
+  document.getElementById('dashSeg').addEventListener('click', (e)=>{
+    const btn = e.target.closest('button[data-dash]'); if(!btn) return;
+    document.querySelectorAll('#dashSeg button').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    state.lineStyle = btn.dataset.dash; saveState();
+  });
+
+  document.getElementById('undoBtn').addEventListener('click', ()=>{
+    curState().drawings.pop(); redrawCanvas(); saveState();
+  });
+  document.getElementById('clearBtn').addEventListener('click', ()=>{
+    curState().drawings = []; redrawCanvas(); saveState();
+  });
+  document.getElementById('resetBtn').addEventListener('click', ()=>{
+    if(state.mode==='full'){
+      const f = makeFullFormation(state.full.homePreset, state.full.awayPreset);
+      state.full.players = f.players; state.full.ball = f.ball;
+    } else {
+      const f = makeHalfFormation(state.half.preset);
+      state.half.players = f.players; state.half.ball = f.ball;
+    }
+    renderTokens(); saveState();
+  });
+  document.getElementById('flipBtn').addEventListener('click', ()=>{
+    const h = curH(); const s = curState();
+    s.players.forEach(p=> p.y = h - p.y);
+    s.ball.y = h - s.ball.y;
+    s.drawings.forEach(d=>{
+      if(d.type==='arrow'){ d.y1 = h-d.y1; d.y2 = h-d.y2; }
+      else if(d.type==='pen'){ d.points.forEach(pt=> pt.y = h-pt.y); }
+      else if(d.type==='text'){ d.y = h-d.y; }
+    });
+    renderTokens(); redrawCanvas(); saveState();
+  });
+
+  const blueInput = document.getElementById('blueLabelInput');
+  const redInput = document.getElementById('redLabelInput');
+  blueInput.value = state.teamLabels.blue;
+  redInput.value = state.teamLabels.red;
+  blueInput.addEventListener('input', ()=>{ state.teamLabels.blue = blueInput.value; saveState(); });
+  redInput.addEventListener('input', ()=>{ state.teamLabels.red = redInput.value; saveState(); });
+
+  // ---------- initial paint (must run before any optional/observer setup) ----------
+  document.querySelectorAll('#modeSeg button').forEach(b=>{
+    b.classList.toggle('active', b.dataset.mode===state.mode);
+  });
+  document.querySelectorAll('.swatch').forEach(b=>{
+    b.classList.toggle('selected', b.dataset.color===state.color);
+  });
+  document.querySelectorAll('#dashSeg button').forEach(b=>{
+    b.classList.toggle('active', b.dataset.dash===state.lineStyle);
+  });
+
+  refreshPresetUI();
+  buildPitchSVG();
+  renderTokens();
+  redrawCanvas();
+
+  // ---------- optional resize handling (guarded so a missing API can't break init) ----------
+  function handleResize(){ updatePitchWrapHeight(); redrawCanvas(); }
+  window.addEventListener('resize', handleResize);
+  window.addEventListener('orientationchange', handleResize);
+  try{
+    if(typeof ResizeObserver !== 'undefined'){
+      new ResizeObserver(handleResize).observe(pitchWrap.parentElement);
+    }
+  }catch(e){}
+})();
+</script>
+</body>
+</html>
