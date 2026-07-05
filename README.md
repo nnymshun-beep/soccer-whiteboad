@@ -1,1 +1,1 @@
-# soccer-whiteboad
+# soccer-whiteboard
